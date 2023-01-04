@@ -21,6 +21,34 @@ const product = {};
       }
     }
 
+    const getCategory = async () => {
+
+      category = await getData('https://api-online.myer.com.au/v2/category/tree/top');
+
+    }
+
+    const getData = async (url) => {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+
+
+
+    const submitProduct = () => {
+      submit(product, url);
+    }
+
+
+    const submitCategory = () => {
+      submit(category, url)
+    }
+
     const submit = (body, url) => {
       fetch(url, {
         method: 'POST',
@@ -38,30 +66,4 @@ const product = {};
         })
         .then(data => console.log(data))
         .catch(error => console.error(error));
-    }
-
-    const getData = async (url) => {
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    
-    const getCategory = async () => {
-
-      category = await getData('https://api-online.myer.com.au/v2/category/tree/top');
-     
-    }
-
-
-    const submitProduct = () => {
-      submit(product, url);
-    }
-
-  
-    const submitCategory = () => {
-      submit(category, url)
     }
